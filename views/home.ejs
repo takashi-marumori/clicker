@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script type="module" src="/click.js"></script>
+  <title>clicker</title>
+</head>
+<body>
+  <header>
+    <div class="title">
+      Clicker
+    </div>
+  </header>
+  <main id="clicker">
+    <div class="left-body">
+      <div>
+        <div class="click-times">
+          <p>合計クリック回数：{{ Math.floor(resultCounter) }}回</p>
+          <div class="state">
+            <h6>自動クリック回数：{{ secondCounter }}回/s</h6>
+            <h6>１クリックあたり：{{ oneClick }}回</h6>
+            <button @click="reset">リセットする</button>
+          </div>
+        </div>
+        <button class="clicker" @click="activeClick">
+          ここをクリック
+        </button>
+      </div>
+    </div>
+    <div class="right-body">
+      <%- include('upgrade001.ejs'); %>
+      <%- include('upgrade002.ejs'); %>
+    </div>
+  </main>
+</body>
+</html>

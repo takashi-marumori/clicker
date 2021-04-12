@@ -10,4 +10,5 @@ node.jsとvue.jsの練習で作ったクリッカーゲームです。
 
 # git clone
 % git clone https://github.com/takashi-marumori/clicker.git
+
 % nodemon app.js

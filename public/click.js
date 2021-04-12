@@ -21,7 +21,7 @@ let appClick = new Vue({
         return this.clickCounter + this.autoCounter - this.minusCounter
        },
       secondCounter(){
-        return (this.levelUpgrade001 / 10) + (this.levelUpgrade002)
+        return (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002)
        },
       oneClick(){
         return 1 + Math.floor((this.levelUpgrade001 * 0.1) + (this.levelUpgrade002 * 0.5))
@@ -30,7 +30,7 @@ let appClick = new Vue({
 
     created: function(){
       setInterval(() => {
-        this.autoCounter += (this.levelUpgrade001 / 10)
+        this.autoCounter += (this.levelUpgrade001 * 0.1)
                           + (this.levelUpgrade002)
       }, 1000)
     },

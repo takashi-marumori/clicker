@@ -1,0 +1,31 @@
+<p v-if="resultCounter >= Math.ceil(needClickUpgrade003)">
+  <button class="upgrade" @click="clickUpgrade003">
+    <div class="upgrade-title">
+      アップグレード３
+    </div>
+    <div>
+      <div>
+        レベル： {{ levelUpgrade003 }}
+      </div>
+      <div>
+        必要なクリック数： {{ Math.ceil(needClickUpgrade003) }}
+      </div>
+    </div>
+  </button>
+</p>
+
+<p v-else>
+  <button class="upgrade mask">
+    <div class="upgrade-title">
+      アップグレード３
+    </div>
+    <div>
+      <div>
+        レベル： {{ levelUpgrade003 }}
+      </div>
+      <div>
+        必要なクリック数： {{ Math.ceil(needClickUpgrade003) }}
+      </div>
+    </div>
+  </button>
+</p>

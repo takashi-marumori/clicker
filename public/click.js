@@ -7,37 +7,47 @@ let appClick = new Vue({
     minusCounter: 0,
     levelUpgrade001: 0,
     levelUpgrade002: 0,
+    levelUpgrade003: 0,
+    levelUpgrade004: 0,
     needClickUpgrade001: 10,
     needClickUpgrade002: 50,
+    needClickUpgrade003: 250,
+    needClickUpgrade004: 1000,
   },
 
   computed: {
     gameObject() {
       return [this.clickCounter, this.autoCounter,
       this.levelUpgrade001, this.levelUpgrade002,
-      this.needClickUpgrade001, this.needClickUpgrade002]
+      this.levelUpgrade003, this.levelUpgrade004,
+      this.needClickUpgrade001, this.needClickUpgrade002,
+      this.needClickUpgrade003, this.needClickUpgrade004,
+    ]
     },
     resultCounter() {
       return this.clickCounter + this.autoCounter - this.minusCounter
     },
     secondCounter() {
-      return (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002)
+      return (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002) + (this.levelUpgrade003 * 2) + (this.levelUpgrade003 * 5)
     },
     oneClick() {
-      return 1 + Math.floor((this.levelUpgrade001 * 0.1) + (this.levelUpgrade002 * 0.5))
+      return 1 + Math.floor(
+        (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002 * 0.5) + (this.levelUpgrade003) + (this.levelUpgrade002 * 2)
+        )
     }
   },
 
   created: function () {
     setInterval(() => {
-      this.autoCounter += (this.levelUpgrade001 * 0.1)
-        + (this.levelUpgrade002)
-    }, 1000)
+      this.autoCounter += (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002 * 0.5) + (this.levelUpgrade003) + (this.levelUpgrade004 * 2)
+      }, 1000)
   },
 
   methods: {
     activeClick: function () {
-      this.clickCounter += 1 + Math.floor((this.levelUpgrade001 * 0.1) + (this.levelUpgrade002 * 0.5))
+      this.clickCounter += 1 + Math.floor(
+        (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002 * 0.5) + (this.levelUpgrade003) + (this.levelUpgrade004 * 2)
+        )
     },
     reset: function () {
       this.clickCounter = 0,
@@ -45,8 +55,12 @@ let appClick = new Vue({
         this.minusCounter = 0,
         this.levelUpgrade001 = 0,
         this.levelUpgrade002 = 0,
+        this.levelUpgrade003 = 0,
+        this.levelUpgrade004 = 0,
         this.needClickUpgrade001 = 10,
-        this.needClickUpgrade002 = 50
+        this.needClickUpgrade002 = 50,
+        this.needClickUpgrade003 = 250,
+        this.needClickUpgrade004 = 1000
     },
     clickUpgrade001: function () {
       this.minusCounter += this.needClickUpgrade001
@@ -58,6 +72,16 @@ let appClick = new Vue({
       this.levelUpgrade002 += 1,
         this.needClickUpgrade002 *= 1.5
     },
+    clickUpgrade003: function () {
+      this.minusCounter += this.needClickUpgrade003
+      this.levelUpgrade003 += 1,
+        this.needClickUpgrade003 *= 1.5
+    },
+    clickUpgrade004: function () {
+      this.minusCounter += this.needClickUpgrade004
+      this.levelUpgrade004 += 1,
+        this.needClickUpgrade004 *= 1.5
+    },
   },
 
   watch: {
@@ -68,6 +92,10 @@ let appClick = new Vue({
       localStorage.setItem('needClickUpgrade001', JSON.stringify(this.needClickUpgrade001));
       localStorage.setItem('levelUpgrade002', JSON.stringify(this.levelUpgrade002));
       localStorage.setItem('needClickUpgrade002', JSON.stringify(this.needClickUpgrade002));
+      localStorage.setItem('levelUpgrade003', JSON.stringify(this.levelUpgrade003));
+      localStorage.setItem('needClickUpgrade003', JSON.stringify(this.needClickUpgrade003));
+      localStorage.setItem('levelUpgrade004', JSON.stringify(this.levelUpgrade004));
+      localStorage.setItem('needClickUpgrade004', JSON.stringify(this.needClickUpgrade004));
     },
     deep: true
   },
@@ -79,5 +107,9 @@ let appClick = new Vue({
     this.needClickUpgrade001 = JSON.parse(localStorage.getItem('needClickUpgrade001'));
     this.levelUpgrade002 = JSON.parse(localStorage.getItem('levelUpgrade002'));
     this.needClickUpgrade002 = JSON.parse(localStorage.getItem('needClickUpgrade002'));
+    this.levelUpgrade003 = JSON.parse(localStorage.getItem('levelUpgrade003'));
+    this.needClickUpgrade003 = JSON.parse(localStorage.getItem('needClickUpgrade003'));
+    this.levelUpgrade004 = JSON.parse(localStorage.getItem('levelUpgrade004'));
+    this.needClickUpgrade004 = JSON.parse(localStorage.getItem('needClickUpgrade004'));
   },
 });

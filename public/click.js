@@ -28,11 +28,11 @@ let appClick = new Vue({
       return this.clickCounter + this.autoCounter - this.minusCounter
     },
     secondCounter() {
-      return (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002) + (this.levelUpgrade003 * 2) + (this.levelUpgrade003 * 5)
+      return (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002) + (this.levelUpgrade003 * 2) + (this.levelUpgrade004 * 5)
     },
     oneClick() {
       return 1 + Math.floor(
-        (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002 * 0.5) + (this.levelUpgrade003) + (this.levelUpgrade002 * 2)
+        (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002 * 0.5) + (this.levelUpgrade003) + (this.levelUpgrade004 * 2)
         )
     }
   },

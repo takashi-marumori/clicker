@@ -1,18 +1,20 @@
-let appClick = new Vue({
+var appClick = new Vue({
 
   el: '#clicker',
-  data: {
-    clickCounter: 0,
-    autoCounter: 0,
-    minusCounter: 0,
-    levelUpgrade001: 0,
-    levelUpgrade002: 0,
-    levelUpgrade003: 0,
-    levelUpgrade004: 0,
-    needClickUpgrade001: 10,
-    needClickUpgrade002: 50,
-    needClickUpgrade003: 250,
-    needClickUpgrade004: 1000,
+  data() {
+    return {
+      clickCounter: 0,
+      autoCounter: 0,
+      minusCounter: 0,
+      levelUpgrade001: 0,
+      levelUpgrade002: 0,
+      levelUpgrade003: 0,
+      levelUpgrade004: 0,
+      needClickUpgrade001: 10,
+      needClickUpgrade002: 50,
+      needClickUpgrade003: 250,
+      needClickUpgrade004: 1000,
+    }
   },
 
   computed: {
@@ -49,18 +51,8 @@ let appClick = new Vue({
         (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002 * 0.5) + (this.levelUpgrade003) + (this.levelUpgrade004 * 2)
         )
     },
-    reset: function () {
-      this.clickCounter = 0,
-        this.autoCounter = 0,
-        this.minusCounter = 0,
-        this.levelUpgrade001 = 0,
-        this.levelUpgrade002 = 0,
-        this.levelUpgrade003 = 0,
-        this.levelUpgrade004 = 0,
-        this.needClickUpgrade001 = 10,
-        this.needClickUpgrade002 = 50,
-        this.needClickUpgrade003 = 250,
-        this.needClickUpgrade004 = 1000
+    clear: function () {
+      Object.assign(this.$data, this.$options.data.call(this))
     },
     clickUpgrade001: function () {
       this.minusCounter += this.needClickUpgrade001

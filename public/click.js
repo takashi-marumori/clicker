@@ -2,17 +2,17 @@ var upgrades = Vue.extend({
   props:['name'],
   template:
     `
-    <p v-if="resultCounter >= Math.ceil(needClickUpgrade004)">
-    <button class="upgrade" @click="clickUpgrade004">
+    <p v-if="$parent.resultCounter >= Math.ceil($parent.needClickUpgrade004)">
+    <button class="upgrade" @click="$parent.clickUpgrade004">
       <div class="upgrade-title">
         {{name}}
       </div>
       <div>
         <div>
-          レベル： {{ levelUpgrade004 }}
+          レベル： {{ $parent.levelUpgrade004 }}
         </div>
         <div>
-          必要なクリック数： {{ Math.ceil(needClickUpgrade004) }}
+          必要なクリック数： {{ Math.ceil($parent.needClickUpgrade004) }}
         </div>
       </div>
     </button>
@@ -25,19 +25,16 @@ var upgrades = Vue.extend({
       </div>
       <div>
         <div>
-          レベル： {{ levelUpgrade004 }}
+          レベル： {{ $parent.levelUpgrade004 }}
         </div>
         <div>
-          必要なクリック数： {{ Math.ceil(needClickUpgrade004) }}
+          必要なクリック数： {{ Math.ceil($parent.needClickUpgrade004) }}
         </div>
       </div>
     </button>
   </p>
     `
 })
-
-
-
 
 var appClick = new Vue({
 

@@ -1,18 +1,19 @@
 var upgrades = Vue.extend({
-  props:['name'],
+  props:['name','level','need','click'],
+  
   template:
     `
-    <p v-if="$parent.resultCounter >= Math.ceil($parent.needClickUpgrade004)">
-    <button class="upgrade" @click="$parent.clickUpgrade004">
+    <p v-if="$parent.resultCounter >= Math.ceil(need)">
+    <button class="upgrade" @click="click">
       <div class="upgrade-title">
         {{name}}
       </div>
       <div>
         <div>
-          レベル： {{ $parent.levelUpgrade004 }}
+          レベル： {{ level }}
         </div>
         <div>
-          必要なクリック数： {{ Math.ceil($parent.needClickUpgrade004) }}
+          必要なクリック数： {{ Math.ceil(need) }}
         </div>
       </div>
     </button>
@@ -25,17 +26,16 @@ var upgrades = Vue.extend({
       </div>
       <div>
         <div>
-          レベル： {{ $parent.levelUpgrade004 }}
+          レベル： {{ level }}
         </div>
         <div>
-          必要なクリック数： {{ Math.ceil($parent.needClickUpgrade004) }}
+          必要なクリック数： {{ Math.ceil(need) }}
         </div>
       </div>
     </button>
   </p>
     `
 })
-
 var appClick = new Vue({
 
   el: '#clicker',
@@ -83,7 +83,7 @@ var appClick = new Vue({
 
   created: function () {
     setInterval(() => {
-      this.autoCounter += (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002 * 0.5) + (this.levelUpgrade003) + (this.levelUpgrade004 * 2)
+      this.autoCounter += (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002) + (this.levelUpgrade003 * 2) + (this.levelUpgrade004 * 5)
       }, 1000)
   },
 

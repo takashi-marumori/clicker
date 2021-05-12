@@ -32,12 +32,10 @@
       </div>
     </div>
     <div class="right-body">
-      <%- include('upgrade001.ejs'); %>
-      <%- include('upgrade002.ejs'); %>
-      <%- include('upgrade003.ejs'); %>
-      <%- include('upgrade004.ejs'); %>
-      <upgrades name="アップグレード３" level="level-upgrade003"></upgrades>
-      <upgrades name="アップグレード４" level="level-upgrade004"></upgrades>
+      <upgrades name="アップグレード１" :click=clickUpgrade001 :level=levelUpgrade001 :need=needClickUpgrade001></upgrades>
+      <upgrades name="アップグレード２" :click=clickUpgrade002 :level=levelUpgrade002 :need=needClickUpgrade002></upgrades>
+      <upgrades name="アップグレード３" :click=clickUpgrade003 :level=levelUpgrade003 :need=needClickUpgrade003></upgrades>
+      <upgrades name="アップグレード４" :click=clickUpgrade004 :level=levelUpgrade004 :need=needClickUpgrade004></upgrades>
       <%- include('debug.ejs'); %>
     </div>
   </main>

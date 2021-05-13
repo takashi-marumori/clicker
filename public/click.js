@@ -37,7 +37,6 @@ var upgrades = Vue.extend({
     `
 })
 var appClick = new Vue({
-
   el: '#clicker',
   components: {
     'upgrades': upgrades

@@ -36,6 +36,8 @@ var upgrades = Vue.extend({
   </p>
     `
 })
+
+
 var appClick = new Vue({
   el: '#clicker',
   components: {
@@ -49,28 +51,26 @@ var appClick = new Vue({
       minusCounter: 0,
       boostItem: 1,
       boostSwitch: false,
-      levelUpgrade001: 0,
-      levelUpgrade002: 0,
-      levelUpgrade003: 0,
-      levelUpgrade004: 0,
-      needClickUpgrade001: 10,
-      needClickUpgrade002: 50,
-      needClickUpgrade003: 250,
-      needClickUpgrade004: 1000,
+      levelUpgrade001: 0,needClickUpgrade001: 10,
+      levelUpgrade002: 0,needClickUpgrade002: 50,
+      levelUpgrade003: 0,needClickUpgrade003: 250,
+      levelUpgrade004: 0,needClickUpgrade004: 1000,
     }
   },
 
   computed: {
     gameObject() {
-      return [this.clickCounter, this.autoCounter,this.minusCounter,
+      return [
+       this.clickCounter, this.autoCounter,this.minusCounter,this.boostItem,this.boostSwitch,
       this.levelUpgrade001, this.levelUpgrade002,
       this.levelUpgrade003, this.levelUpgrade004,
       this.needClickUpgrade001, this.needClickUpgrade002,
       this.needClickUpgrade003, this.needClickUpgrade004,
-    ]
+      ]
     },
     resultCounter() {
       return this.clickCounter + this.autoCounter - this.minusCounter
+      
     },
     secondCounter() {
       return (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002) + (this.levelUpgrade003 * 2) + (this.levelUpgrade004 * 5)
@@ -78,7 +78,7 @@ var appClick = new Vue({
     oneClick() {
       return (1 + Math.floor(
         (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002 * 0.5) + (this.levelUpgrade003) + (this.levelUpgrade004 * 2)
-        )) * this.boostItem
+        ))* this.boostItem
     }
   },
 
@@ -99,11 +99,12 @@ var appClick = new Vue({
     },
     boost: function(){
       if ((this.resultCounter > this.oneClick * 100) && this.boostSwitch == false) {
-        this.minusCounter += this.oneClick * 100;
-        this.boostItem = 10;
-        this.boostSwitch = true;
+        this.minusCounter += this.oneClick * 100
+        this.boostItem = 10
+        this.boostSwitch = true
+
           setTimeout(function(){
-            this.boostItem = 1,
+            this.boostItem = 1
             this.boostSwitch = false
           }.bind(this),5000)
       } else {

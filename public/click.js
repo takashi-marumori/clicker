@@ -47,6 +47,8 @@ var appClick = new Vue({
       clickCounter: 0,
       autoCounter: 0,
       minusCounter: 0,
+      boostItem: 1,
+      boostSwitch: false,
       levelUpgrade001: 0,
       levelUpgrade002: 0,
       levelUpgrade003: 0,
@@ -60,7 +62,7 @@ var appClick = new Vue({
 
   computed: {
     gameObject() {
-      return [this.clickCounter, this.autoCounter,
+      return [this.clickCounter, this.autoCounter,this.minusCounter,
       this.levelUpgrade001, this.levelUpgrade002,
       this.levelUpgrade003, this.levelUpgrade004,
       this.needClickUpgrade001, this.needClickUpgrade002,
@@ -74,9 +76,9 @@ var appClick = new Vue({
       return (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002) + (this.levelUpgrade003 * 2) + (this.levelUpgrade004 * 5)
     },
     oneClick() {
-      return 1 + Math.floor(
+      return (1 + Math.floor(
         (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002 * 0.5) + (this.levelUpgrade003) + (this.levelUpgrade004 * 2)
-        )
+        )) * this.boostItem
     }
   },
 
@@ -88,12 +90,25 @@ var appClick = new Vue({
 
   methods: {
     activeClick: function () {
-      this.clickCounter += 1 + Math.floor(
+      this.clickCounter += (1 + Math.floor(
         (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002 * 0.5) + (this.levelUpgrade003) + (this.levelUpgrade004 * 2)
-        )
+        )) * this.boostItem
     },
     clear: function () {
       Object.assign(this.$data, this.$options.data.call(this))
+    },
+    boost: function(){
+      if ((this.resultCounter > this.oneClick * 100) && this.boostSwitch == false) {
+        this.minusCounter += this.oneClick * 100;
+        this.boostItem = 10;
+        this.boostSwitch = true;
+          setTimeout(function(){
+            this.boostItem = 1,
+            this.boostSwitch = false
+          }.bind(this),5000)
+      } else {
+        return false
+      }
     },
     clickUpgrade001: function () {
       this.minusCounter += this.needClickUpgrade001
@@ -121,6 +136,7 @@ var appClick = new Vue({
     gameObject: function () {
       localStorage.setItem('clickCounter', JSON.stringify(this.clickCounter));
       localStorage.setItem('autoCounter', JSON.stringify(this.autoCounter));
+      localStorage.setItem('minusCounter', JSON.stringify(this.minusCounter));
       localStorage.setItem('levelUpgrade001', JSON.stringify(this.levelUpgrade001));
       localStorage.setItem('needClickUpgrade001', JSON.stringify(this.needClickUpgrade001));
       localStorage.setItem('levelUpgrade002', JSON.stringify(this.levelUpgrade002));
@@ -136,6 +152,7 @@ var appClick = new Vue({
   mounted: function () {
     this.clickCounter = JSON.parse(localStorage.getItem('clickCounter'));
     this.autoCounter = JSON.parse(localStorage.getItem('autoCounter'));
+    this.minusCounter = JSON.parse(localStorage.getItem('minusCounter'));
     this.levelUpgrade001 = JSON.parse(localStorage.getItem('levelUpgrade001'));
     this.needClickUpgrade001 = JSON.parse(localStorage.getItem('needClickUpgrade001'));
     this.levelUpgrade002 = JSON.parse(localStorage.getItem('levelUpgrade002'));

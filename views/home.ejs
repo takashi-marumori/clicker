@@ -21,9 +21,8 @@
         <div class="click-times">
           <p>合計クリック回数：{{ Math.floor(resultCounter) }}回</p>
           <div class="state">
-            <h6>自動クリック回数：{{ secondCounter }}回/s</h6>
+            <h6>自動クリック回数：{{ Math.floor(secondCounter * 10) / 10 }}回/s</h6>
             <h6>１クリックあたり：{{ oneClick }}回</h6>
-            <button @click="clear">リセットする</button>
           </div>
         </div>
         <button class="clicker" @click="activeClick">
@@ -32,11 +31,17 @@
       </div>
     </div>
     <div class="right-body">
-      <upgrades name="アップグレード１" :click=clickUpgrade001 :level=levelUpgrade001 :need=needClickUpgrade001></upgrades>
-      <upgrades name="アップグレード２" :click=clickUpgrade002 :level=levelUpgrade002 :need=needClickUpgrade002></upgrades>
-      <upgrades name="アップグレード３" :click=clickUpgrade003 :level=levelUpgrade003 :need=needClickUpgrade003></upgrades>
-      <upgrades name="アップグレード４" :click=clickUpgrade004 :level=levelUpgrade004 :need=needClickUpgrade004></upgrades>
-      <%- include('debug.ejs'); %>
+      <div class="right-header">
+        <button @click="clear">リセットする</button>
+        <button @click="clickCounter += 10000">デバッグ用<br>(クリック:+10000)</button>
+        <button @click="boost">ブーストする</button>
+      </div>
+      <div class="right-content">
+        <upgrades name="アップグレード１" :click=clickUpgrade001 :level=levelUpgrade001 :need=needClickUpgrade001></upgrades>
+        <upgrades name="アップグレード２" :click=clickUpgrade002 :level=levelUpgrade002 :need=needClickUpgrade002></upgrades>
+        <upgrades name="アップグレード３" :click=clickUpgrade003 :level=levelUpgrade003 :need=needClickUpgrade003></upgrades>
+        <upgrades name="アップグレード４" :click=clickUpgrade004 :level=levelUpgrade004 :need=needClickUpgrade004></upgrades>
+      </div>
     </div>
   </main>
 </body>

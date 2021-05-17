@@ -109,14 +109,12 @@ var appClick = new Vue({
           setTimeout(function(){
             this.boostClickItem = 1
             this.boostAutoItem = 1
-          }.bind(this),5000)
+          }.bind(this),30000)
 
-          setTimeout(function(e){
+          setTimeout(function(){
             this.boostSwitch = false;
             booster.style.opacity = 1
           }.bind(this),300000)
-      } else {
-        return false
       }
     },
     clickUpgrade001: function () {

@@ -32,9 +32,9 @@
     </div>
     <div class="right-body">
       <div class="right-header">
-        <button @click="clear" style="cursor: pointer;">リセットする</button>
-        <button @click="clickCounter += 10000" style="font-size: 80%; cursor: pointer;">デバッグ用<br>(クリック:+10000)</button>
-        <button @click="boost" style="cursor: pointer;">ブーストする</button>
+        <button @click="clear" class="right-tester">リセットする</button>
+        <button @click="clickCounter += 10000" class="right-tester">デバッグ用<br>(クリック:+10000)</button>
+        <button @click="boost" class="right-tester" id="booster">ブーストする</button>
       </div>
       <div class="right-content">
         <upgrades name="アップグレード１" :click=clickUpgrade001 :level=levelUpgrade001 :need=needClickUpgrade001></upgrades>

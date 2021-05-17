@@ -87,6 +87,12 @@ main {
   padding: 1%;
 }
 
+.right-tester{
+  cursor: pointer;
+  font-size: 70%;
+  border: 1px solid;
+}
+
 /*upgrade*/
 .upgrade {
   margin: 2%;

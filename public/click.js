@@ -49,7 +49,8 @@ var appClick = new Vue({
       clickCounter: 0,
       autoCounter: 0,
       minusCounter: 0,
-      boostItem: 1,
+      boostClickItem: 1,
+      boostAutoItem: 1,
       boostSwitch: false,
       levelUpgrade001: 0,needClickUpgrade001: 10,
       levelUpgrade002: 0,needClickUpgrade002: 50,
@@ -61,7 +62,7 @@ var appClick = new Vue({
   computed: {
     gameObject() {
       return [
-       this.clickCounter, this.autoCounter,this.minusCounter,this.boostItem,this.boostSwitch,
+       this.clickCounter, this.autoCounter,this.minusCounter,this.boostClickItem,this.boostAutoItem,this.boostSwitch,
       this.levelUpgrade001, this.levelUpgrade002,
       this.levelUpgrade003, this.levelUpgrade004,
       this.needClickUpgrade001, this.needClickUpgrade002,
@@ -73,18 +74,18 @@ var appClick = new Vue({
       
     },
     secondCounter() {
-      return (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002) + (this.levelUpgrade003 * 2) + (this.levelUpgrade004 * 5)
+      return ((this.levelUpgrade001 * 0.1) + (this.levelUpgrade002) + (this.levelUpgrade003 * 2) + (this.levelUpgrade004 * 5)) * this.boostAutoItem
     },
     oneClick() {
       return (1 + Math.floor(
         (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002 * 0.5) + (this.levelUpgrade003) + (this.levelUpgrade004 * 2)
-        ))* this.boostItem
+        ))* this.boostClickItem
     }
   },
 
   created: function () {
     setInterval(() => {
-      this.autoCounter += (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002) + (this.levelUpgrade003 * 2) + (this.levelUpgrade004 * 5)
+      this.autoCounter += ((this.levelUpgrade001 * 0.1) + (this.levelUpgrade002) + (this.levelUpgrade003 * 2) + (this.levelUpgrade004 * 5)) * this.boostAutoItem
       }, 1000)
   },
 
@@ -92,21 +93,28 @@ var appClick = new Vue({
     activeClick: function () {
       this.clickCounter += (1 + Math.floor(
         (this.levelUpgrade001 * 0.1) + (this.levelUpgrade002 * 0.5) + (this.levelUpgrade003) + (this.levelUpgrade004 * 2)
-        )) * this.boostItem
+        )) * this.boostClickItem
     },
     clear: function () {
       Object.assign(this.$data, this.$options.data.call(this))
     },
     boost: function(){
-      if ((this.resultCounter > this.oneClick * 100) && this.boostSwitch == false) {
-        this.minusCounter += this.oneClick * 100
-        this.boostItem = 10
+      let booster = document.getElementById("booster")
+      if (this.boostSwitch == false) {
+        this.boostClickItem = 10
+        this.boostAutoItem = 10
         this.boostSwitch = true
+        booster.style.opacity = 0.2
 
           setTimeout(function(){
-            this.boostItem = 1
-            this.boostSwitch = false
+            this.boostClickItem = 1
+            this.boostAutoItem = 1
           }.bind(this),5000)
+
+          setTimeout(function(e){
+            this.boostSwitch = false;
+            booster.style.opacity = 1
+          }.bind(this),300000)
       } else {
         return false
       }
@@ -114,7 +122,7 @@ var appClick = new Vue({
     clickUpgrade001: function () {
       this.minusCounter += this.needClickUpgrade001
       this.levelUpgrade001 += 1,
-        this.needClickUpgrade001 *= 1.5
+      this.needClickUpgrade001 *= 1.5
     },
     clickUpgrade002: function () {
       this.minusCounter += this.needClickUpgrade002

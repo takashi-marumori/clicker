@@ -34,7 +34,8 @@
       <div class="right-header">
         <button @click="clear" class="right-tester">リセットする</button>
         <button @click="clickCounter += 10000" class="right-tester">デバッグ用<br>(クリック:+10000)</button>
-        <button @click="boost" class="right-tester" id="booster">ブーストする</button>
+        <button v-if="boostSwitch" @click="boost" class="right-tester" id="booster" style="opacity: 0.2;">ブーストする</button>
+        <button v-else @click="boost" class="right-tester" id="booster" style="opacity: 1;">ブーストする</button>
       </div>
       <div class="right-content">
         <upgrades name="アップグレード１" :click=clickUpgrade001 :level=levelUpgrade001 :need=needClickUpgrade001></upgrades>

@@ -51,7 +51,7 @@ var appClick = new Vue({
       minusCounter: 0,
       boostClickItem: 1,
       boostAutoItem: 1,
-      boostSwitch: false,
+      boostSwitch: true,
       levelUpgrade001: 0,needClickUpgrade001: 10,
       levelUpgrade002: 0,needClickUpgrade002: 50,
       levelUpgrade003: 0,needClickUpgrade003: 250,
@@ -63,10 +63,10 @@ var appClick = new Vue({
     gameObject() {
       return [
        this.clickCounter, this.autoCounter,this.minusCounter,this.boostClickItem,this.boostAutoItem,this.boostSwitch,
-      this.levelUpgrade001, this.levelUpgrade002,
-      this.levelUpgrade003, this.levelUpgrade004,
-      this.needClickUpgrade001, this.needClickUpgrade002,
-      this.needClickUpgrade003, this.needClickUpgrade004,
+      this.levelUpgrade001, this.needClickUpgrade001,
+      this.levelUpgrade002, this.needClickUpgrade002,
+      this.levelUpgrade003, this.needClickUpgrade003,
+      this.levelUpgrade004, this.needClickUpgrade004,
       ]
     },
     resultCounter() {
@@ -99,21 +99,18 @@ var appClick = new Vue({
       Object.assign(this.$data, this.$options.data.call(this))
     },
     boost: function(){
-      let booster = document.getElementById("booster")
       if (this.boostSwitch == false) {
         this.boostClickItem = 10
         this.boostAutoItem = 10
         this.boostSwitch = true
-        booster.style.opacity = 0.2
 
           setTimeout(function(){
             this.boostClickItem = 1
             this.boostAutoItem = 1
-          }.bind(this),30000)
+          }.bind(this),15000)
 
           setTimeout(function(){
             this.boostSwitch = false;
-            booster.style.opacity = 1
           }.bind(this),300000)
       }
     },
@@ -168,5 +165,9 @@ var appClick = new Vue({
     this.needClickUpgrade003 = JSON.parse(localStorage.getItem('needClickUpgrade003'));
     this.levelUpgrade004 = JSON.parse(localStorage.getItem('levelUpgrade004'));
     this.needClickUpgrade004 = JSON.parse(localStorage.getItem('needClickUpgrade004'));
+    
+      setTimeout(function(){
+        this.boostSwitch = false;
+      }.bind(this),300000)
   },
 });
